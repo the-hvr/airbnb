@@ -4,6 +4,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 
+// Load .env variables
+require('dotenv').config(); 
+
 const app = express();
 const PORT =process.env.PORT || 8080;
 
@@ -14,24 +17,39 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('ejs', ejsMate);
 
 
-//SERVE STATIC FILES :
+//MIDDLEWARES : 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended : true}));
+app.use(express.json());
 
 
 // override with POST having ?_method=DELETE/PUT/PATCH
 app.use(methodOverride('_method'));
 
 
-//MONGOOSE SETUP :
-const mongoose_url = 'mongodb://127.0.0.1:27017/wanderlust';
+//MONGOOSE SETUP FOR LOCAL DB:
+// const mongoose_url = 'mongodb://127.0.0.1:27017/wanderlust';
+
+// main()
+//     .then(() => console.log(`CONNECTION SUCCESSFULL AT URL ${mongoose_url}`))
+//     .catch((err) => console.log(err));
+
+// async function main() {
+//     await mongoose.connect(mongoose_url);
+// }
+
+
+//MONGOOSE SETUP FOR ATLAS :
+const mongoose_url = process.env.MONGO_URI;  // Use URI from .env
 
 main()
-    .then(() => console.log(`CONNECTION SUCCESSFULL AT URL ${mongoose_url}`))
-    .catch((err) => console.log(err));
+    .then(() => console.log(`MongoDB connected!`))
+    .catch((err) => console.log("MongoDB connection error:", err));
 
 async function main() {
-    await mongoose.connect(mongoose_url);
+    await mongoose.connect(mongoose_url, 
+        { useNewUrlParser: true, useUnifiedTopology: true }
+    );
 }
 
 
