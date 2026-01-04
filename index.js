@@ -47,9 +47,7 @@ main()
     .catch((err) => console.log("MongoDB connection error:", err));
 
 async function main() {
-    await mongoose.connect(mongoose_url, 
-        { useNewUrlParser: true, useUnifiedTopology: true }
-    );
+    await mongoose.connect(mongoose_url);
 }
 
 
@@ -70,7 +68,7 @@ app.get('/listings', async (req, res) => {
         res.render('./listings/index.ejs', {allListings});
     } 
     catch (error){ 
-        console.log(err);
+        console.log(error);
         res.status(500).send("SERVER SIDE ERROR!");
     }     
 });
