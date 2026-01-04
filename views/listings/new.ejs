@@ -1,0 +1,57 @@
+<% layout('/layouts/boilerplate') %>
+
+    <body>
+        <div class="row">
+            <div class="col-8">
+                <h3 class="mb-4">Create New Listing
+                    <hr>
+                </h3>
+                <form action="/listings" method="post">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Enter Title : </label>
+                        <input type="text" name="listing[title]" id="title" class="form-control" required placeholder="Add a catchy tittle">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Add Description :</label>
+                        <textarea name="listing[description]" id="description" class="form-control"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Add Image URL :</label>
+                        <input type="text" name="listing[image][url]" id="image" class="form-control" placeholder="image url/link">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 price">
+                        <label for="price" class="form-label">Enter Price : </label>
+                        <input type="number" name="listing[price]" id="price" placeholder="must be in Ruppess"
+                            class="form-control" required>
+                    </div>
+
+                    <div class="col-md-8 location">
+                        <label for="location" class="form-label">Location : </label>
+                        <input type="text" name="listing[location]" id="location" class="form-control" required placeholder="Jaipur, Rajasthan">
+                    </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Country :</label>
+                        <input type="text" name="listing[country]" id="country" class="form-control" placeholder="India">
+                    </div>
+
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" class="form-check-input" id="terms">
+                        <label class="form-check-label" for="terms">Agree T&C; </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="reset" class="btn btn-danger"><i class="fa-solid fa-rotate-right"></i></button>
+                        <button type="submit" class="btn btn-dark">ADD NOW</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <hr>
+    </body>
